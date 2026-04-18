@@ -40,3 +40,4 @@ public class WorkoutSession {
     this.endLongitude = endLongitude;
     this.altitude = altitude;
 }
+]
