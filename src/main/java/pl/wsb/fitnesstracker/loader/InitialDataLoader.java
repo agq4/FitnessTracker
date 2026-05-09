@@ -9,14 +9,18 @@ import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.wsb.fitnesstracker.event.Event;
+import pl.wsb.fitnesstracker.event.EventRepository;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
-
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 import static java.time.LocalDate.now;
 import static java.util.Objects.isNull;
@@ -166,6 +170,11 @@ class InitialDataLoader {
         if (isNull(userRepository)) {
             throw new IllegalStateException("Initial data loader was not autowired correctly " + this);
         }
+
+        List<Event> events = EventRepository.findUpcoming(LocalDate.now());
+        System.out.println("Nadchodzące eventy: " + events.size());
     }
 
 }
+
+
