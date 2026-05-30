@@ -6,6 +6,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
+import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 
 import java.util.List;
 
@@ -24,20 +25,22 @@ class UserController {
 
     private final UserMapper userMapper;
 
+
     @PostMapping
     public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         // TODO: Implement the method to add a new user.
         //  You can use the @RequestBody annotation to map the request body to the UserDto object.
-
-        return null;
+return userMapper.toDto (
+        userService.createUser(userMapper.toEntity(userDto))
+);
     }
 
     @GetMapping
-    public List<UserDto> getUsers() throws InterruptedException {
+    public List<UserSimpleDto> getUsergetAllUsers() throws InterruptedException {
 
        return this.userProvider.findAllUsers().stream()
-                .map(this.userMapper::toUserDto)
+                .map(this.userMapper::toSimpleDto)
                 .toList();
     }
 

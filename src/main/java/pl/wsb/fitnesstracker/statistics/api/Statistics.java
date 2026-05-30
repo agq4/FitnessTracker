@@ -24,7 +24,7 @@ private User user;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user;
+
 
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
